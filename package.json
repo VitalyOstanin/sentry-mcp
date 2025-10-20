@@ -1,0 +1,63 @@
+{
+  "name": "@vitalyostanin/sentry-mcp",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "postbuild": "chmod +x dist/index.js",
+    "dev": "tsc -p tsconfig.json --watch",
+    "start": "node dist/index.js",
+    "dev:watch": "tsc -p tsconfig.json --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "sentry",
+    "issues",
+    "observability",
+    "claude"
+  ],
+  "author": "Vitaly Ostanin <vitaly.ostanin@mail.ru>",
+  "license": "MIT",
+  "description": "Sentry MCP server providing orgs, projects, and issues search via Model Context Protocol.",
+  "type": "module",
+  "bin": {
+    "sentry-mcp": "dist/index.js"
+  },
+  "homepage": "https://github.com/VitalyOstanin/sentry-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitalyOstanin/sentry-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VitalyOstanin/sentry-mcp/issues"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "dist/**/*.json",
+    "README.md",
+    "README-ru.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@vitalyostanin/mutex-pool": "^0.0.3",
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "axios": "^1.12.2",
+    "luxon": "^3.5.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "@types/luxon": "^3.7.1",
+    "@types/node": "^22.18.10",
+    "@vitalyostanin/eslint-prefer-de-morgan-law": "^1.0.2",
+    "eslint": "^9.37.0",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.46.0"
+  }
+}
