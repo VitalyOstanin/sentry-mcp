@@ -4,6 +4,7 @@ import packageJson from "../package.json" with { type: "json" };
 import { SentryClient } from "./sentry/index.js";
 // toolError imported implicitly via handlers
 import { loadConfig } from "./config/index.js";
+import { setDefaultUseStructuredContent } from "./utils/tool-response.js";
 import { initializeTimezone } from "./utils/date.js";
 import { serviceInfoArgs, serviceInfoHandler } from "./tools/service-info.js";
 import { organizationsArgs, organizationsHandler } from "./tools/organizations.js";
@@ -35,6 +36,7 @@ export class SentryMcpServer {
     const cfg = loadConfig();
 
     initializeTimezone(cfg.timezone);
+    setDefaultUseStructuredContent(cfg.useStructuredContent);
     this.client = new SentryClient();
 
     this.registerTools();

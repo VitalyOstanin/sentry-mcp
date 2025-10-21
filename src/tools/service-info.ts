@@ -14,6 +14,7 @@ export async function serviceInfoHandler(client: SentryClient) {
       tokenPresent: Boolean(config.sentry.token),
       timezone: config.timezone,
       readOnly: config.readOnly,
+      useStructuredContent: config.useStructuredContent,
     });
   } catch (error) {
     return toolError(error);

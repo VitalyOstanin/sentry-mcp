@@ -28,6 +28,7 @@ Sentry MCP server provides tools for working with Sentry organizations, projects
   - `SENTRY_TIMEZONE` — optional, defaults to `Europe/Moscow`
   - `SENTRY_READ_ONLY` — optional, defaults to `true`
   - `SENTRY_HTTP_TIMEOUT_MS` — optional request timeout in ms (default `10000`)
+  - `SENTRY_USE_STRUCTURED_CONTENT` — optional, controls response format (default: `true`). When `true`, tools return only the MCP `structuredContent` node with full data. When `false`, tools return only the MCP `content` node (single text item with JSON string).
 
 ## Installation
 ### Using npx (Recommended)
@@ -56,6 +57,8 @@ args = ["-y", "@vitalyostanin/sentry-mcp@latest"]
 [mcp_servers.sentry-mcp.env]
 SENTRY_URL = "https://sentry.example.com"
 SENTRY_TOKEN = "<token>"
+# If your client expects data in the MCP `content` field (text), set:
+# SENTRY_USE_STRUCTURED_CONTENT = "false"
 ```
 
 ## Configuration for Claude Code CLI
@@ -67,7 +70,8 @@ SENTRY_TOKEN = "<token>"
       "args": ["-y", "@vitalyostanin/sentry-mcp@latest"],
       "env": {
         "SENTRY_URL": "https://sentry.example.com",
-        "SENTRY_TOKEN": "<token>"
+        "SENTRY_TOKEN": "<token>",
+        "SENTRY_USE_STRUCTURED_CONTENT": "false"
       }
     }
   }
@@ -75,7 +79,25 @@ SENTRY_TOKEN = "<token>"
 ```
 
 ## Configuration for VS Code Cline
-Add similar entry to your `cline_mcp_settings.json`.
+Add similar entry to your `cline_mcp_settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "sentry-mcp": {
+      "command": "npx",
+      "args": ["-y", "@vitalyostanin/sentry-mcp@latest"],
+      "env": {
+        "SENTRY_URL": "https://sentry.example.com",
+        "SENTRY_TOKEN": "<token>",
+        "SENTRY_USE_STRUCTURED_CONTENT": "false"
+      }
+    }
+  }
+}
+```
+
+Tools return either `structuredContent` (default) or a text `content` item, depending on `SENTRY_USE_STRUCTURED_CONTENT`.
 
 ## MCP Tools
 

@@ -112,10 +112,12 @@ async function processWithLimit<T, R>(items: T[], limit: number, worker: (item: 
 
 - Do not roll your own worker loops; prefer the shared pattern above for readability and correctness.
 
-### MCP Response Format for Claude Code
-- Claude Code reads data from the MCP `content` field, so every tool response must serialize its payload there.
-- Continue providing `structuredContent`, but never rely on it alone.
-- Use `toolSuccess` to ensure both `content` and `structuredContent` are populated consistently.
+### MCP Response Format
+- The server returns exactly one data node by default, controlled via `SENTRY_USE_STRUCTURED_CONTENT` (default: "true").
+- When `true`: return only `structuredContent` with full data, and include an empty `content: []` to satisfy MCP typing.
+- When `false`: return only `content` (single `text` item with JSON string), omit `structuredContent`.
+- For errors, always set `isError: true` and apply the same single-node rule (i.e., empty `content` with `structuredContent` when `true`, or text `content` when `false`).
+- Use `toolSuccess`/`toolError` in `src/utils/tool-response.ts` to keep behavior consistent across all tools.
 
 ## MCP Tooling Expectations
 - Implement pagination for every MCP tool that may return large result sets; expose explicit pagination parameters and defaults in the schema.
