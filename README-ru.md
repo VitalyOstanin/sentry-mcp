@@ -1,6 +1,9 @@
 
 # Sentry MCP Server
 
+[![CI](https://github.com/VitalyOstanin/sentry-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/VitalyOstanin/sentry-mcp/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@vitalyostanin/sentry-mcp.svg)](https://www.npmjs.com/package/@vitalyostanin/sentry-mcp)
+
 ## Содержание
 
 - [Возможности](#возможности)

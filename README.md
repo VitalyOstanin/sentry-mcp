@@ -3,6 +3,9 @@
 
 Also available in Russian: [README-ru.md](README-ru.md)
 
+[![CI](https://github.com/VitalyOstanin/sentry-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/VitalyOstanin/sentry-mcp/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@vitalyostanin/sentry-mcp.svg)](https://www.npmjs.com/package/@vitalyostanin/sentry-mcp)
+
 Sentry MCP server provides tools for working with Sentry organizations, projects, and issues directly from Claude Code, Code CLI, and other MCP clients.
 
 ## Table of Contents
