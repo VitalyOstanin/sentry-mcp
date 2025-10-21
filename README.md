@@ -1,6 +1,8 @@
 
 # Sentry MCP Server
 
+Also available in Russian: [README-ru.md](README-ru.md)
+
 Sentry MCP server provides tools for working with Sentry organizations, projects, and issues directly from Claude Code, Code CLI, and other MCP clients.
 
 ## Table of Contents
