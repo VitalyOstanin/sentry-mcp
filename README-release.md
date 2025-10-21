@@ -59,6 +59,14 @@ npm install
 ### 3. Documentation Updates
 - Ensure README.md and README-ru.md reflect the current toolset and configuration.
 
+#### CHANGELOG Updates
+```bash
+ls -1 CHANGELOG*.md 2>/dev/null || echo "No changelog files found"
+```
+- If present, ensure the new version/date and changes are recorded.
+
+#### README Updates
+
 #### README TOC Verification
 - Confirm that both README files include a correct Table of Contents:
   - Presence:

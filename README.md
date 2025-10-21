@@ -76,10 +76,13 @@ SENTRY_TOKEN = "<token>"
 Add similar entry to your `cline_mcp_settings.json`.
 
 ## MCP Tools
-- `service_info` — status information: url, tokenPresent, timezone, readOnly, version.
-- `sentry_organizations` — args: `cursor?`, `perPage? (1..100)`, `briefOutput?` (default true); returns `{ items, nextCursor, count }`.
-- `sentry_projects` — args: `org`, `query?`, `cursor?`, `perPage?`, `briefOutput?` (default true); returns `{ items, nextCursor, count }`.
-- `sentry_issues` — args: `org`, `query?`, `environments?: string[]`, `statsPeriod?` or `since/until`, `project?: number|number[]|string|string[]` (often required by Sentry; accepts id or slug), `perPage? (1..100)`, `cursor?`, `briefOutput?` (default true); returns `{ items, nextCursor, count }`.
-- `sentry_issue_latest_event` — args: `issueId`, `briefOutput?` (default true); returns latest event summary (exceptions with formatted frames) or raw when `briefOutput=false`.
-- `sentry_issues_latest_events_batch` — args: `issueIds: string[] (max 50)`, `concurrency? (1..10, default 5)`, `briefOutput?` (default true); returns `{ items, failed, count }`.
-- `sentry_issues_details_batch` — args: `issueIds: string[] (max 50)`, `concurrency? (1..10, default 5)`, `briefOutput?` (default true); returns `{ items, failed, count }`.
+
+| Tool | Description |
+| --- | --- |
+| `service_info` | Status information: url, tokenPresent, timezone, readOnly, version. |
+| `sentry_organizations` | List organizations with pagination (cursor/perPage); brief mode by default. |
+| `sentry_projects` | List projects in an organization; supports query, pagination, brief mode. |
+| `sentry_issues` | List issues with filters: query, environments, statsPeriod or since/until, project; pagination supported. |
+| `sentry_issue_latest_event` | Get latest event for an issue (brief summary by default). |
+| `sentry_issues_latest_events_batch` | Get latest events for multiple issues with safe concurrency. |
+| `sentry_issues_details_batch` | Get issue details for multiple issues with safe concurrency. |

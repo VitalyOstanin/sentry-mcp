@@ -74,25 +74,16 @@ SENTRY_TOKEN = "<token>"
 Добавьте в `cline_mcp_settings.json` аналогично примеру выше.
 
 ## MCP-инструменты
-- `service_info`: статус интеграции (url, tokenPresent, timezone, readOnly, version).
-- `sentry_organizations`:
-  - Вход: `cursor?`, `perPage? (1..100)`, `briefOutput?` (по умолчанию `true`).
-  - Выход: `{ items, nextCursor, count }`.
-- `sentry_projects`:
-  - Вход: `org` (slug), `query?`, `cursor?`, `perPage?`, `briefOutput?` (по умолчанию `true`).
-  - Выход: `{ items, nextCursor, count }`.
-- `sentry_issues`:
-  - Вход: `org`, `query?`, `environments?: string[]`, `statsPeriod?` или `since/until`, `project?: number|number[]|string|string[]` (часто обязателен на стороне Sentry; можно передавать id или slug), `perPage? (1..100)`, `cursor?`, `briefOutput?` (по умолчанию `true`).
-  - Выход: `{ items, nextCursor, count }`.
-- `sentry_issue_latest_event`:
-  - Вход: `issueId`, `briefOutput?` (по умолчанию `true`).
-  - Выход: краткая сводка исключений c форматированными фреймами либо `raw` при `briefOutput=false`.
-- `sentry_issues_latest_events_batch`:
-  - Вход: `issueIds: string[] (макс. 50)`, `concurrency? (1..10, по умолчанию 5)`, `briefOutput?` (по умолчанию `true`).
-  - Выход: `{ items, failed, count }`.
-- `sentry_issues_details_batch`:
-  - Вход: `issueIds: string[] (макс. 50)`, `concurrency? (1..10, по умолчанию 5)`, `briefOutput?` (по умолчанию `true`).
-  - Выход: `{ items, failed, count }`.
+
+| Инструмент | Описание |
+| --- | --- |
+| `service_info` | Статус интеграции: url, tokenPresent, timezone, readOnly, version. |
+| `sentry_organizations` | Список организаций с пагинацией (cursor/perPage); по умолчанию brief. |
+| `sentry_projects` | Список проектов организации; поддерживает query, пагинацию, brief режим. |
+| `sentry_issues` | Список issues с фильтрами: query, environments, statsPeriod или since/until, project; поддерживается пагинация. |
+| `sentry_issue_latest_event` | Последнее событие для issue (по умолчанию краткая сводка). |
+| `sentry_issues_latest_events_batch` | Последние события для нескольких issues с ограничением конкурентности. |
+| `sentry_issues_details_batch` | Детали для нескольких issues с ограничением конкурентности. |
 
 Примечания:
 - Используйте `query` по синтаксису Sentry, например: `is:unresolved environment:production`. Для нескольких окружений передайте `environments: ["production", "staging"]`.
