@@ -59,6 +59,24 @@ npm install
 ### 3. Documentation Updates
 - Ensure README.md and README-ru.md reflect the current toolset and configuration.
 
+#### README TOC Verification
+- Confirm that both README files include a correct Table of Contents:
+  - Presence:
+    ```bash
+    rg -n "^## Table of Contents" README.md README-ru.md
+    ```
+  - Compare headers vs TOC entries:
+    ```bash
+    for f in README.md README-ru.md; do
+      echo "== $f ==";
+      echo "Headers (H2/H3):";
+      rg -n "^(##|###) " "$f" | sed -E 's/^[^ ]+\s+//' | sed -E 's/^#+ //';
+      echo "TOC entries:";
+      rg -n "^- \\[[^\\]]+\\\\]\\(#[^)]+\\)" "$f" || true;
+    done
+    ```
+  - If mismatches are found, update the TOC blocks before release.
+
 ### 4. Build Validation
 
 ```bash

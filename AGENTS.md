@@ -40,6 +40,24 @@
   - [Section 2](#section-2)
   ```
 
+### Pre‑Release TOC Verification (Release Rule)
+- Before every release, verify that README TOCs are present and accurate:
+  - Files: `README.md` and `README-ru.md`.
+  - Ensure each TOC includes all `##` and `###` headings in the correct order and with proper anchors.
+- Suggested quick checks:
+  - Presence: `rg -n "^## Table of Contents" README.md README-ru.md`
+  - Compare headers vs TOC entries:
+    ```bash
+    for f in README.md README-ru.md; do
+      echo "== $f ==";
+      echo "Headers (H2/H3):";
+      rg -n "^(##|###) " "$f" | sed -E 's/^[^ ]+\s+//' | sed -E 's/^#+ //';
+      echo "TOC entries:";
+      rg -n "^- \\[[^\\]]+\\\\]\\(#[^)]+\\)" "$f" || true;
+    done
+    ```
+  - If mismatches are found, update the TOC blocks in the README files accordingly.
+
 ### TOC Exception for Robot-Facing Markdown
 - Robot-facing instruction files do not require a TOC to stay compact for agent ingestion and reduce noise.
 - Applies to: `AGENTS.md`, `CLAUDE.md`, and other docs intended primarily for AI agents (e.g., files under `.code/agents/`, `.claude/`).
