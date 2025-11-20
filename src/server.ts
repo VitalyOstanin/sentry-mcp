@@ -4,7 +4,6 @@ import packageJson from "../package.json" with { type: "json" };
 import { SentryClient } from "./sentry/index.js";
 // toolError imported implicitly via handlers
 import { loadConfig } from "./config/index.js";
-import { setDefaultUseStructuredContent } from "./utils/tool-response.js";
 import { initializeTimezone } from "./utils/date.js";
 import { serviceInfoArgs, serviceInfoHandler } from "./tools/service-info.js";
 import { organizationsArgs, organizationsHandler } from "./tools/organizations.js";
@@ -36,7 +35,6 @@ export class SentryMcpServer {
     const cfg = loadConfig();
 
     initializeTimezone(cfg.timezone);
-    setDefaultUseStructuredContent(cfg.useStructuredContent);
     this.client = new SentryClient();
 
     this.registerTools();
@@ -70,7 +68,7 @@ export class SentryMcpServer {
 
     this.server.tool(
       "sentry_issues",
-      "List Sentry issues within an organization with filtering by query, environment(s), statsPeriod or since/until, project, pagination via cursor/perPage. Parameters: briefOutput (default true) returns key fields; set to false for full fields. Returns items, nextCursor, count. TIP: Prefer the 'environments' parameter. Note: Sentry often requires 'project' (id or slug).",
+      "List Sentry issues within an organization with filtering by query, environment(s), statsPeriod or since/until, project, pagination via cursor/perPage. Parameters: briefOutput (default true) returns key fields; set to false for full fields. Returns items, nextCursor, count. TIP: Prefer the 'environments' parameter. Note: Sentry often requires 'project' (id or slug). Support automatic pagination with 'limit' parameter (1..1000).",
       sentryIssuesArgs,
       async (args) => sentryIssuesHandler(this.client, args),
     );

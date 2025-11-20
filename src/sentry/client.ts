@@ -58,6 +58,7 @@ export class SentryClient {
     params: {
       cursor?: string;
       perPage?: number;
+      limit?: number;
       query?: string;
       environments?: string[];
       statsPeriod?: string;
@@ -67,13 +68,13 @@ export class SentryClient {
       signal?: AbortSignal;
     } = {},
   ) {
-    const { cursor, perPage, query, environments, statsPeriod, since, until, project } = params;
+    const { cursor, perPage, limit, query, environments, statsPeriod, since, until, project } = params;
     const resp = await this.axios.get(`/api/0/organizations/${encodeURIComponent(orgSlug)}/issues/`, {
       params: {
         cursor,
         // Some Sentry endpoints use per_page, others honor limit; send both
         per_page: perPage ?? 50,
-        limit: perPage ?? 50,
+        limit: limit ?? perPage ?? 50, // Use limit if provided, otherwise perPage, then default to 50
         query,
         // environment supports array to filter by multiple
         environment: environments,

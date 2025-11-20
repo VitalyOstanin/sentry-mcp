@@ -30,7 +30,6 @@
   - `SENTRY_TIMEZONE` — таймзона (опционально, по умолчанию `Europe/Moscow`).
   - `SENTRY_READ_ONLY` — флаг (по умолчанию `true`).
   - `SENTRY_HTTP_TIMEOUT_MS` — таймаут HTTP-запросов в мс (опционально, по умолчанию `10000`).
-  - `SENTRY_USE_STRUCTURED_CONTENT` — опционально, управляет форматом ответа (по умолчанию: `true`). При `true` инструменты возвращают только узел MCP `structuredContent` с полными данными. При `false` инструменты возвращают только узел MCP `content` (один текстовый элемент с JSON-строкой).
 
 ## Установка
 ### Используя npx (Рекомендуется)
@@ -59,8 +58,6 @@ args = ["-y", "@vitalyostanin/sentry-mcp@latest"]
 [mcp_servers.sentry-mcp.env]
 SENTRY_URL = "https://sentry.example.com"
 SENTRY_TOKEN = "<token>"
-# Если ваш клиент ожидает данные в MCP `content` (текст), укажите:
-# SENTRY_USE_STRUCTURED_CONTENT = "false"
 ```
 
 ## Конфигурация для Claude Code CLI
@@ -72,8 +69,7 @@ SENTRY_TOKEN = "<token>"
       "args": ["-y", "@vitalyostanin/sentry-mcp@latest"],
       "env": {
         "SENTRY_URL": "https://sentry.example.com",
-        "SENTRY_TOKEN": "<token>",
-        "SENTRY_USE_STRUCTURED_CONTENT": "false"
+        "SENTRY_TOKEN": "<token>"
       }
     }
   }
@@ -91,15 +87,13 @@ SENTRY_TOKEN = "<token>"
       "args": ["-y", "@vitalyostanin/sentry-mcp@latest"],
       "env": {
         "SENTRY_URL": "https://sentry.example.com",
-        "SENTRY_TOKEN": "<token>",
-        "SENTRY_USE_STRUCTURED_CONTENT": "false"
+        "SENTRY_TOKEN": "<token>"
       }
     }
   }
 }
 ```
 
-Инструменты возвращают либо `structuredContent` (по умолчанию), либо текстовый элемент `content` — в зависимости от `SENTRY_USE_STRUCTURED_CONTENT`.
 
 ## MCP-инструменты
 

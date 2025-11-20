@@ -8,7 +8,6 @@ export interface Config {
   readOnly: boolean;
   timezone: string;
   httpTimeoutMs: number;
-  useStructuredContent: boolean;
 }
 
 let cachedConfig: Config | null = null;
@@ -22,8 +21,7 @@ export function loadConfig(force = false): Config {
   const rawToken = process.env.SENTRY_TOKEN;
   const rawTimezone = process.env.SENTRY_TIMEZONE;
   const rawTimeout = process.env.SENTRY_HTTP_TIMEOUT_MS;
-  const rawUseStructured = process.env.SENTRY_USE_STRUCTURED_CONTENT;
-  const parsed = environmentSchema.safeParse({ url: rawUrl, token: rawToken, timezone: rawTimezone, httpTimeoutMs: rawTimeout ? Number(rawTimeout) : undefined, useStructuredContent: rawUseStructured });
+  const parsed = environmentSchema.safeParse({ url: rawUrl, token: rawToken, timezone: rawTimezone, httpTimeoutMs: rawTimeout ? Number(rawTimeout) : undefined });
 
   if (!parsed.success) {
     const message = `Invalid Sentry environment configuration. Ensure SENTRY_URL and SENTRY_TOKEN are set correctly: ${parsed.error.message}`;
@@ -38,7 +36,6 @@ export function loadConfig(force = false): Config {
     readOnly,
     timezone: parsed.data.timezone ?? "Europe/Moscow",
     httpTimeoutMs: parsed.data.httpTimeoutMs ?? 10_000,
-    useStructuredContent: parsed.data.useStructuredContent,
   } satisfies Config;
 
   return cachedConfig;

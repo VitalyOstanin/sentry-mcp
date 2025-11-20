@@ -9,9 +9,4 @@ export const environmentSchema = z.object({
     .min(10, "SENTRY_TOKEN looks too short"),
   timezone: z.string().optional(),
   httpTimeoutMs: z.number().int().positive().max(60000).optional(),
-  useStructuredContent: z
-    .string()
-    .optional()
-    .default("true")
-    .transform((val) => val !== "false"),
 });
