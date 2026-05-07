@@ -2,6 +2,7 @@
 # Sentry MCP Server
 
 [![CI](https://github.com/VitalyOstanin/sentry-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/VitalyOstanin/sentry-mcp/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/VitalyOstanin/sentry-mcp/graph/badge.svg?branch=master)](https://codecov.io/gh/VitalyOstanin/sentry-mcp)
 [![npm version](https://img.shields.io/npm/v/@vitalyostanin/sentry-mcp.svg)](https://www.npmjs.com/package/@vitalyostanin/sentry-mcp)
 
 ## Содержание
