@@ -1,11 +1,11 @@
 # Changelog
 
 ## Table of Contents
-- [Unreleased](#unreleased)
+- [v0.2.0 - 2026-05-07](#v020---2026-05-07)
 - [v0.1.1 - 2025-10-21](#v011---2025-10-21)
 - [v0.1.0 - 2024-10-20](#v010---2024-10-20)
 
-## Unreleased
+## v0.2.0 - 2026-05-07
 
 ### Changed
 - Modernized toolchain: TypeScript 6, ESLint 10 (flat config + `projectService`), Zod 4, `@modelcontextprotocol/sdk` 1.29, Vitest 4 + `@vitest/coverage-v8` for unit tests, `eslint-config-flat-gitignore` instead of repeated ignore blocks.
@@ -26,6 +26,9 @@
 - `@vitalyostanin/eslint-prefer-de-morgan-law` plugin and its rule.
 - `tsconfig.eslint.json` (replaced by ESLint `projectService`).
 - `.npmignore` (the `files` allow-list in `package.json` is the single source of truth for published artefacts).
+
+### Tests
+- Coverage thresholds set to a low 1/1/1/1 floor while the test surface is just `src/utils/date.ts`. Real baseline: statements 3.66%, lines 3.41%, branches 1.32%, functions 7.14%. Raise as new test files for mappers / http-error / tool-response land.
 
 ## v0.1.1 - 2025-10-21
 
