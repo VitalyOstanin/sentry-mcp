@@ -1,6 +1,6 @@
-import { DateTime, Settings } from "luxon";
+import { DateTime, Settings } from 'luxon';
 
-let currentTimezone = "Europe/Moscow";
+let currentTimezone = 'Europe/Moscow';
 
 export function initializeTimezone(timezone: string): void {
   currentTimezone = timezone;
@@ -14,7 +14,7 @@ export function getTimezone(): string {
 export function formatDatetime(isoString: string | undefined | null): string | undefined {
   if (!isoString) return undefined;
 
-  const formatted = DateTime.fromISO(isoString).toFormat("yyyy-MM-dd HH:mm:ss");
+  const formatted = DateTime.fromISO(isoString).toFormat('yyyy-MM-dd HH:mm:ss');
 
   return `${formatted} (${currentTimezone})`;
 }

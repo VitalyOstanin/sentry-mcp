@@ -1,5 +1,5 @@
-import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
-import { ZodError } from "zod";
+import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+import { ZodError } from 'zod';
 
 export function toolSuccess<T>(payload: T): CallToolResult {
   const base = { success: true, payload } as const;
@@ -7,7 +7,7 @@ export function toolSuccess<T>(payload: T): CallToolResult {
   return {
     content: [
       {
-        type: "text",
+        type: 'text',
         text: JSON.stringify(base),
       },
     ],
@@ -17,8 +17,8 @@ export function toolSuccess<T>(payload: T): CallToolResult {
 export function toolError(error: unknown): CallToolResult {
   if (error instanceof ZodError) {
     const errObj = {
-      name: "ValidationError",
-      message: "Invalid input",
+      name: 'ValidationError',
+      message: 'Invalid input',
       details: error.flatten(),
     } as const;
 
@@ -26,11 +26,11 @@ export function toolError(error: unknown): CallToolResult {
       isError: true,
       content: [
         {
-          type: "text",
+          type: 'text',
           text: JSON.stringify(errObj),
         },
       ],
-    } as CallToolResult;
+    };
   }
 
   if (error instanceof Error) {
@@ -42,21 +42,21 @@ export function toolError(error: unknown): CallToolResult {
     return {
       isError: true,
       content: [
-        { type: "text", text: JSON.stringify(errObj) },
+        { type: 'text', text: JSON.stringify(errObj) },
       ],
-    } as CallToolResult;
+    };
   }
 
   const errObj = {
-    name: "UnknownError",
-    message: "An unknown error occurred",
+    name: 'UnknownError',
+    message: 'An unknown error occurred',
     details: error,
   } as const;
 
   return {
     isError: true,
     content: [
-      { type: "text", text: JSON.stringify(errObj) },
+      { type: 'text', text: JSON.stringify(errObj) },
     ],
-  } as CallToolResult;
+  };
 }

@@ -1,5 +1,5 @@
-import axios, { type AxiosInstance } from "axios";
-import { loadConfig, type Config } from "../config/index.js";
+import axios, { type AxiosInstance } from 'axios';
+import { loadConfig, type Config } from '../config/index.js';
 
 export class SentryClient {
   private readonly axios: AxiosInstance;
@@ -12,7 +12,7 @@ export class SentryClient {
       timeout: this.config.httpTimeoutMs,
       headers: {
         Authorization: `Bearer ${this.config.sentry.token}`,
-        Accept: "application/json",
+        Accept: 'application/json',
       },
     });
   }
@@ -34,7 +34,7 @@ export class SentryClient {
   }
 
   async listOrganizations(params: { cursor?: string; perPage?: number; signal?: AbortSignal } = {}) {
-    const resp = await this.axios.get("/api/0/organizations/", {
+    const resp = await this.axios.get('/api/0/organizations/', {
       params: { cursor: params.cursor, per_page: params.perPage ?? 50 },
       signal: params.signal,
     });

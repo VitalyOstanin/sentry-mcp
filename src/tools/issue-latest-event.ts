@@ -1,11 +1,11 @@
-import { z } from "zod";
-import type { SentryClient } from "../sentry/index.js";
-import { toolError, toolSuccess } from "../utils/tool-response.js";
-import { mapEvent } from "../mappers/sentry-event.js";
+import { z } from 'zod';
+import type { SentryClient } from '../sentry/index.js';
+import { toolError, toolSuccess } from '../utils/tool-response.js';
+import { mapEvent } from '../mappers/sentry-event.js';
 
 export const sentryIssueLatestEventArgs = {
-  issueId: z.string().describe("Sentry issue id"),
-  briefOutput: z.boolean().optional().describe("If true, returns compact payload (default: true)"),
+  issueId: z.string().describe('Sentry issue id'),
+  briefOutput: z.boolean().optional().describe('If true, returns compact payload (default: true)'),
 } as const;
 
 const schema = z.object(sentryIssueLatestEventArgs);

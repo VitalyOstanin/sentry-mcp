@@ -1,14 +1,14 @@
-import { z } from "zod";
-import type { SentryClient } from "../sentry/index.js";
-import { toolError, toolSuccess } from "../utils/tool-response.js";
-import { mapProject } from "../mappers/sentry.js";
+import { z } from 'zod';
+import type { SentryClient } from '../sentry/index.js';
+import { toolError, toolSuccess } from '../utils/tool-response.js';
+import { mapProject } from '../mappers/sentry.js';
 
 export const sentryProjectsArgs = {
-  org: z.string().describe("Organization slug"),
-  cursor: z.string().optional().describe("Pagination cursor"),
-  perPage: z.number().int().min(1).max(100).optional().describe("Items per page (1..100)"),
-  query: z.string().optional().describe("Search query for projects"),
-  briefOutput: z.boolean().optional().describe("If true, returns only key fields (default: true)"),
+  org: z.string().describe('Organization slug'),
+  cursor: z.string().optional().describe('Pagination cursor'),
+  perPage: z.number().int().min(1).max(100).optional().describe('Items per page (1..100)'),
+  query: z.string().optional().describe('Search query for projects'),
+  briefOutput: z.boolean().optional().describe('If true, returns only key fields (default: true)'),
 } as const;
 
 const sentryProjectsSchema = z.object(sentryProjectsArgs);

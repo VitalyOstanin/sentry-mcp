@@ -1,2 +1,2 @@
-export { SentryClient } from "./client.js";
+export { SentryClient } from './client.js';
 

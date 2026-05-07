@@ -1,5 +1,5 @@
-import { formatDatetime } from "../utils/date.js";
-import type { SentryIssue, SentryOrganization, SentryProject } from "../sentry/types.js";
+import { formatDatetime } from '../utils/date.js';
+import type { SentryIssue, SentryOrganization, SentryProject } from '../sentry/types.js';
 
 export interface MappedOrganization {
   id: string;
@@ -75,7 +75,7 @@ export function mapIssue(issue: SentryIssue, opts: { brief?: boolean } = {}): Ma
   const base: MappedIssue = {
     id: String(issue.id),
     shortId: issue.shortId,
-    title: String(issue.title ?? ""),
+    title: String(issue.title ?? ''),
     status: issue.status,
     lastSeen: formatDatetime(issue.lastSeen),
     permalink: issue.permalink,
@@ -89,7 +89,7 @@ export function mapIssue(issue: SentryIssue, opts: { brief?: boolean } = {}): Ma
     level: issue.level,
     isPublic: Boolean(issue.isPublic),
     assignedTo: issue.assignedTo ?? undefined,
-    userCount: typeof issue.userCount === "number" ? issue.userCount : undefined,
+    userCount: typeof issue.userCount === 'number' ? issue.userCount : undefined,
     count: issue.count,
     firstSeen: formatDatetime(issue.firstSeen),
   };

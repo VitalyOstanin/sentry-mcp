@@ -1,13 +1,13 @@
-import { z } from "zod";
-import type { SentryClient } from "../sentry/index.js";
-import { toolError, toolSuccess } from "../utils/tool-response.js";
-import { mapIssue } from "../mappers/sentry.js";
+import { z } from 'zod';
+import type { SentryClient } from '../sentry/index.js';
+import { toolError, toolSuccess } from '../utils/tool-response.js';
+import { mapIssue } from '../mappers/sentry.js';
 
 export const sentryIssuesArgs = {
-  org: z.string().describe("Organization slug"),
-  cursor: z.string().optional().describe("Pagination cursor"),
-  perPage: z.number().int().min(1).max(100).optional().describe("Items per page (1..100)"),
-  limit: z.number().int().min(1).max(1000).optional().describe("Maximum number of items to return (1..1000). If specified, automatic pagination will be performed."),
+  org: z.string().describe('Organization slug'),
+  cursor: z.string().optional().describe('Pagination cursor'),
+  perPage: z.number().int().min(1).max(100).optional().describe('Items per page (1..100)'),
+  limit: z.number().int().min(1).max(1000).optional().describe('Maximum number of items to return (1..1000). If specified, automatic pagination will be performed.'),
   query: z
     .string()
     .optional()
@@ -19,20 +19,20 @@ export const sentryIssuesArgs = {
     .optional()
     .describe("Filter by multiple environments (recommended). Example: ['stage']"),
   statsPeriod: z.string().optional().describe("Relative period, e.g., '14d' or '24h'"),
-  since: z.string().optional().describe("ISO start datetime when not using statsPeriod"),
-  until: z.string().optional().describe("ISO end datetime when not using statsPeriod"),
+  since: z.string().optional().describe('ISO start datetime when not using statsPeriod'),
+  until: z.string().optional().describe('ISO end datetime when not using statsPeriod'),
   project: z
     .union([z.number(), z.array(z.number()), z.string(), z.array(z.string())])
     .optional()
-    .describe("Project id/ids or slug/slugs. Sentry often requires this."),
-  briefOutput: z.boolean().optional().describe("If true, returns only key fields (default: true)"),
+    .describe('Project id/ids or slug/slugs. Sentry often requires this.'),
+  briefOutput: z.boolean().optional().describe('If true, returns only key fields (default: true)'),
 } as const;
 
 const sentryIssuesSchema = z
   .object(sentryIssuesArgs)
   .refine((v) => !(v.statsPeriod && (v.since != null || v.until != null)), {
-    message: "Use either statsPeriod or since/until",
-    path: ["statsPeriod"],
+    message: 'Use either statsPeriod or since/until',
+    path: ['statsPeriod'],
   });
 
 export async function sentryIssuesHandler(client: SentryClient, rawInput?: unknown) {

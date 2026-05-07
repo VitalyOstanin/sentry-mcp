@@ -1,12 +1,12 @@
-import { z } from "zod";
-import type { SentryClient } from "../sentry/index.js";
-import { toolError, toolSuccess } from "../utils/tool-response.js";
-import { mapOrganization } from "../mappers/sentry.js";
+import { z } from 'zod';
+import type { SentryClient } from '../sentry/index.js';
+import { toolError, toolSuccess } from '../utils/tool-response.js';
+import { mapOrganization } from '../mappers/sentry.js';
 
 export const organizationsArgs = {
-  cursor: z.string().optional().describe("Pagination cursor"),
-  perPage: z.number().int().min(1).max(100).optional().describe("Items per page (1..100)"),
-  briefOutput: z.boolean().optional().describe("If true, returns only key fields (default: true)"),
+  cursor: z.string().optional().describe('Pagination cursor'),
+  perPage: z.number().int().min(1).max(100).optional().describe('Items per page (1..100)'),
+  briefOutput: z.boolean().optional().describe('If true, returns only key fields (default: true)'),
 } as const;
 
 const organizationsSchema = z.object(organizationsArgs).optional();

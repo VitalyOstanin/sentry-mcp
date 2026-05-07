@@ -1,4 +1,4 @@
-import { environmentSchema } from "./schemas.js";
+import { environmentSchema } from './schemas.js';
 
 export interface Config {
   sentry: {
@@ -29,12 +29,12 @@ export function loadConfig(force = false): Config {
     throw new Error(message);
   }
 
-  const readOnly = process.env.SENTRY_READ_ONLY !== undefined ? process.env.SENTRY_READ_ONLY !== "false" : true;
+  const readOnly = process.env.SENTRY_READ_ONLY !== undefined ? process.env.SENTRY_READ_ONLY !== 'false' : true;
 
   cachedConfig = {
     sentry: { url: parsed.data.url, token: parsed.data.token },
     readOnly,
-    timezone: parsed.data.timezone ?? "Europe/Moscow",
+    timezone: parsed.data.timezone ?? 'Europe/Moscow',
     httpTimeoutMs: parsed.data.httpTimeoutMs ?? 10_000,
   } satisfies Config;
 
