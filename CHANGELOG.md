@@ -1,9 +1,16 @@
 # Changelog
 
 ## Table of Contents
+- [v0.2.1 - 2026-07-03](#v021---2026-07-03)
 - [v0.2.0 - 2026-05-07](#v020---2026-05-07)
 - [v0.1.1 - 2025-10-21](#v011---2025-10-21)
 - [v0.1.0 - 2024-10-20](#v010---2024-10-20)
+
+## v0.2.1 - 2026-07-03
+
+### Changed
+- Dependency maintenance: bumped runtime and dev dependencies to latest (`axios` 1.18.1, plus `eslint` / `vitest` / `typescript-eslint` / `@types/node` 26). Cleared high-severity npm advisories via lockfile updates. No change to the server's own API or behavior.
+- CI: switched the Codecov upload to OIDC (dropped `CODECOV_TOKEN`), and bumped `actions/checkout` to v7 and `codecov/codecov-action` to v7.
 
 ## v0.2.0 - 2026-05-07
 
